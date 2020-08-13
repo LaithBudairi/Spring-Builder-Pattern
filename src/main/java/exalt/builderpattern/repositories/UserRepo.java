@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Repository
 public class UserRepo {
@@ -43,6 +44,17 @@ public class UserRepo {
     public User getUser(String id) {
         return users.stream().filter(u -> u.getId().equals(id)).findFirst().get();
     }
+
+    public Stream<User> getNUsers(int size, int page) {
+        if(page <= 0)
+            page = 1;
+        int offset = (page - 1) * size;
+
+
+
+        return users.stream().skip(offset).limit(size);
+    }
+
 
     public void updateUser(User.UserBuilder u, String id) {
         for(int i = 0; i < users.size(); i++) {

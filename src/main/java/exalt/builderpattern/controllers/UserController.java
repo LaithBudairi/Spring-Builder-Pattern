@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-@RequestMapping(value="/users")
+@RequestMapping(value="/users") //"?size=?&page=?"
 @RestController
 public class UserController {
 
@@ -21,6 +22,11 @@ public class UserController {
     @GetMapping(value = "/")
     public List<User> getAllUsers() {
         return user.getAllUsers();
+    }
+
+    @GetMapping(value = "")
+    public Stream<User> getNUsers(@RequestParam("size") int size, @RequestParam("page") int page) {
+        return user.getNUsers(size, page);
     }
 
     @GetMapping(value = "/{id}")
