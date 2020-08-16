@@ -1,5 +1,6 @@
 package exalt.builderpattern.controllers;
 
+import exalt.builderpattern.models.PersonBuilder;
 import exalt.builderpattern.models.User;
 import exalt.builderpattern.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Stream;
 
-@RequestMapping(value="/users") //"?size=?&page=?"
+@RequestMapping(value="/users")
 @RestController
 public class UserController {
 
@@ -35,12 +36,12 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public void addUser(@RequestBody User.UserBuilder u) {
-        user.addUser(u.build());
+    public void addUser(@RequestBody User u) {
+        user.addUser(u);
     }
 
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody User.UserBuilder u, @PathVariable String id) {
+    public void updateUser(@RequestBody User u, @PathVariable String id) {
         user.updateUser(u, id);
     }
 

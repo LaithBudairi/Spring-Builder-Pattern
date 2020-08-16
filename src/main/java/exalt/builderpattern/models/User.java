@@ -7,12 +7,12 @@ public class User {
     private String email;
     private Address address;
 
-    private static class Address {
+    static class Address {
         private String city;
         private String street;
         private String postCode;
 
-        private Address(String city, String street, String postCode) {
+        Address(String city, String street, String postCode) {
             this.city = city;
             this.street = street;
             this.postCode = postCode;
@@ -29,53 +29,22 @@ public class User {
         public String getPostCode() {
             return postCode;
         }
-
     }
 
-    public static class UserBuilder {
-        private String id;
-        private String name;
-        private String email;
-        private Address address;
-
-        public UserBuilder(String id, String name, String email, String city, String street, String postCode) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.address = new Address(city, street, postCode);
-        }
-
-        public UserBuilder setId(String id){
-            this.id = id;
-            return UserBuilder.this;
-        }
-
-        public UserBuilder setName(String name){
-            this.name = name;
-            return UserBuilder.this;
-        }
-
-        public UserBuilder setEmail(String email){
-            this.email = email;
-            return UserBuilder.this;
-        }
-
-        public UserBuilder setAddress(Address address){
-            this.address = address;
-            return UserBuilder.this;
-        }
-
-        public User build() {
-            return new User(this);
-        }
-
+    public void setId(String id) {
+        this.id = id;
     }
 
-    private User(UserBuilder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.email = builder.email;
-        this.address = builder.address;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getId() {
@@ -93,9 +62,4 @@ public class User {
     public Address getAddress() {
         return address;
     }
-
-    public void doSomething() {
-        // do something
-    }
-
 }
